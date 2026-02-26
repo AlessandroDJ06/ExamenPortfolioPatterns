@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>components</groupId>
-    <artifactId>Oefening01_Traffic_Lights</artifactId>
+    <artifactId>oefening01_trafficLights</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>Oefening01_Traffic_Lights</name>
+    <name>oefening01_trafficLights</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -61,7 +61,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                components.oefening01_traffic_lights/components.oefening01_traffic_lights.HelloApplication
+                                components.oefening01_trafficlights/components.oefening01_trafficlights.HelloApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
