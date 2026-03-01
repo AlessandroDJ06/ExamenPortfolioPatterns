@@ -1,4 +1,5 @@
 package components.oefening01_trafficlights.View.trafficlightscreen;
+import components.oefening01_trafficlights.utils.Observer;
 import components.oefening01_trafficlights.Model.TrafficLightOperations;
 import components.oefening01_trafficlights.View.showdata.ShowDataPresenter;
 import components.oefening01_trafficlights.View.showdata.ShowDataView;
@@ -16,21 +17,16 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
-public class TrafficLightPresenter {
+public class TrafficLightPresenter implements Observer {
     private final TrafficLightOperations model;
     private final TrafficLightView view;
     private Timeline flashTimeline;
-    public TrafficLightPresenter(
-            TrafficLightOperations model, TrafficLightView view) {
+    public TrafficLightPresenter(TrafficLightOperations model, TrafficLightView view) {
         this.model = model;
         this.view = view;
+        this.model.addObserver(this);
         this.flashTimeline = new Timeline(new KeyFrame(Duration.seconds(0.5), event -> {
-            if (view.getMiddleCircle().getFill()==Color.YELLOW){
-                view.getMiddleCircle().setFill(Color.BLACK);
-            } else {
-                view.getMiddleCircle().setFill(Color.YELLOW);
-            }
-
+            model.toggleFlashingVisibility();
         }));
         flashTimeline.setCycleCount(Timeline.INDEFINITE);
         addEventHandlers();
@@ -43,7 +39,6 @@ public class TrafficLightPresenter {
                 if (!model.isTrafficLightOn()) {
                     model.switchTrafficLightOn();
                 }
-                updateView();
             }});
         view.getStopRadioButton().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -52,11 +47,9 @@ public class TrafficLightPresenter {
                     model.switchTrafficLightOff();
                     model.switchTrafficLightFlashingOff();
                 }
-                updateView();
             }});
         view.getSwitchColorButton().setOnAction(event -> {
             model.trafficLightNextColor();
-            updateView();
         });
         view.getFlashingButton().setOnAction(event -> {
             if (model.isTrafficLightOn()){
@@ -68,7 +61,6 @@ public class TrafficLightPresenter {
                     System.out.println("on");
                 }
             }
-            updateView();
         });
         view.getshowDataItem().setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -95,6 +87,11 @@ public class TrafficLightPresenter {
         });
     }
 
+    @Override
+    public void update(Object args){
+        updateView();
+    }
+
     private void updateView() {
         if (model.isTrafficLightRed()){
             view.getTopCircle().setFill(Color.RED);
@@ -116,6 +113,12 @@ public class TrafficLightPresenter {
         if (model.isTrafficLightFlashing()){
             view.getTopCircle().setFill(Color.BLACK);
             view.getBottomCircle().setFill(Color.BLACK);
+            view.getMiddleCircle().setFill(Color.BLACK);
+
+            if (model.isFlashingVisible()){
+                view.getMiddleCircle().setFill(Color.YELLOW);
+            }
+
             this.flashTimeline.play();
             view.getFlashingButton().setText("No Flashing");
         } else {
