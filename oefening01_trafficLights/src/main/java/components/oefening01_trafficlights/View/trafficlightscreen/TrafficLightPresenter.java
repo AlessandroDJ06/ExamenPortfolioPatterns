@@ -49,7 +49,10 @@ public class TrafficLightPresenter implements Observer {
                 }
             }});
         view.getSwitchColorButton().setOnAction(event -> {
-            model.trafficLightNextColor();
+            if (!model.isTrafficLightFlashing()){
+                model.trafficLightNextColor();
+            }
+
         });
         view.getFlashingButton().setOnAction(event -> {
             if (model.isTrafficLightOn()){
