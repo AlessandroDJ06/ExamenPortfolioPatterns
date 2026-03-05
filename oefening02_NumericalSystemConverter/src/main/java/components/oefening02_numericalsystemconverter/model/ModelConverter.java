@@ -1,6 +1,7 @@
 package components.oefening02_numericalsystemconverter.model;
 
 public class ModelConverter {
+    private String resultvalue;
 
     public enum NumericalSystems {
         BINARY, OCTAL, HEXA;
@@ -17,7 +18,7 @@ public class ModelConverter {
         try {
             decValue = Integer.parseInt(decimalValue);
             if (decValue < 0) {
-                result = "Not a positive value!";
+                throw new IllegalArgumentException("geef een positieve waarde in");
             } else {
                 switch (numericalSystem) {
                     case BINARY -> result = Integer.toBinaryString(decValue);
@@ -26,10 +27,15 @@ public class ModelConverter {
                     default -> result = "Something went wrong";
                 }
             }
-        } catch (NumberFormatException exc) {
-            result = "Not a decimal value!!";
+            this.resultvalue = result;
+            return result;
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("De waarde '" + decimalValue + "' is geen getal!");
         }
-        return result;
+
     }
 
+    public String getResultvalue() {
+        return resultvalue;
+    }
 }
