@@ -22,6 +22,7 @@ public class ConverterPresenter {
                         view.getDecimalValue().getText(),
                         ModelConverter.NumericalSystems.values()[view.getNumericalSystems().getSelectionModel().getSelectedIndex()]
                 );
+                updateView();
             } catch (IllegalArgumentException exc){
                 showError(exc);
             }
