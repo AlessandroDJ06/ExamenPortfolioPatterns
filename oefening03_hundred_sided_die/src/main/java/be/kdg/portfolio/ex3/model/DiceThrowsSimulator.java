@@ -15,6 +15,7 @@ public class DiceThrowsSimulator {
         return dice.getCurrentDiceValue();
     }
     public int multiSidedDiceThrow (int minimum, int maximum) {
+        dice.setMinAndMax(minimum,maximum);
         int value = dice.getNewDiceValue();
         throwsArchive.addValueToArchive (dice);
         return value;

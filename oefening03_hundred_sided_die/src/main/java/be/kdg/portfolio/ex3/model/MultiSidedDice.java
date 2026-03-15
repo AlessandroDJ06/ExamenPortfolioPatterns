@@ -16,6 +16,7 @@ public class MultiSidedDice {
     }
 
     public MultiSidedDice(int minimum, int maximum) {
+        setMinAndMax(minimum,maximum);
         throwDice();
     }
     public void throwDice(){
@@ -30,4 +31,14 @@ public class MultiSidedDice {
     }
     public int getDiceMinimum () { return this.min;}
     public int getNumberOfSides () { return this.max - this.min + 1;}
+
+    public void setMinAndMax(int min , int max) {
+            if (min < MIN_VALUE) throw new IllegalArgumentException("getal " + min + " is te klein");
+            this.min = min;
+            if (max > MAX_VALUE) throw new IllegalArgumentException("getal " + max + " is te groot");
+            this.max = max;
+            if (max < min) throw new IllegalArgumentException("min kan niet groter zijn als max");
+    }
+
+
 }

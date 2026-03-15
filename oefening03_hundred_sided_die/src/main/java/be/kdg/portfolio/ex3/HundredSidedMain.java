@@ -1,8 +1,8 @@
 package be.kdg.portfolio.ex3;
 
 import be.kdg.portfolio.ex3.model.DiceThrowsSimulator;
-import be.kdg.portfolio.ex3.view.MainScreenPresenter;
-import be.kdg.portfolio.ex3.view.MainScreenView;
+import be.kdg.portfolio.ex3.view.MainScreen.MainScreenPresenter;
+import be.kdg.portfolio.ex3.view.MainScreen.MainScreenView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;

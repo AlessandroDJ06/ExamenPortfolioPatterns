@@ -1,41 +1,58 @@
-package be.kdg.portfolio.ex3.view;
+package be.kdg.portfolio.ex3.view.MainScreen;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
+import javafx.scene.Node;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 
 public class MainScreenView extends BorderPane {
 
-    private ImageView numberTens;
-    private ImageView numberUnit;
+    private StackPane numberTens;
+    private StackPane numberUnit;
 
     private Spinner spinnerFieldMax;
     private Spinner spinnerFieldMin;
     private Button btnGenerate;
+
+    private MenuBar menu;
+    private Menu help;
+    private MenuItem about;
+    private MenuItem exit;
+
 
     public MainScreenView() {
         initialiseNodes();
         layoutNodes();
     }
     private void initialiseNodes() {
-        numberTens = new ImageView();
-        numberUnit = new ImageView();
+        numberTens = new StackPane();
+        numberUnit = new StackPane();
         btnGenerate = new Button("Generate");
         spinnerFieldMax = new Spinner<Integer> (1,99,6);
         spinnerFieldMin = new Spinner<Integer> (0,98,1);
+        menu = new MenuBar();
+        help = new Menu("help");
+        about = new MenuItem("about");
+        exit = new MenuItem("exit");
     }
 
     private void layoutNodes() {
+        setTop(menu);
+        menu.getMenus().add(help);
+        help.getItems().addAll(about,exit);
+
+
         btnGenerate.setPrefWidth(80);
         Label minLabel = new Label("Min:");
         Label maxLabel = new Label("Max:");
         GridPane playfield = new GridPane();
         playfield.setPadding(new Insets(10));
+        playfield.add(numberTens,3,0);
+        playfield.add(numberUnit,4,0);
         playfield.setHgap(10);
         playfield.setVgap(10);
         playfield.add(minLabel, 3, 1);
@@ -46,9 +63,17 @@ public class MainScreenView extends BorderPane {
         GridPane.setHalignment(btnGenerate, HPos.CENTER);
         this.setCenter(playfield);
     }
-    ImageView getNumberTens() { return this.numberTens; }
-    ImageView getNumberUnit() { return this.numberUnit; }
+    StackPane getNumberTens() { return this.numberTens; }
+    StackPane getNumberUnit() { return this.numberUnit; }
     Spinner getSpinnerMin () { return this.spinnerFieldMin;}
     Spinner getSpinnerMax () { return this.spinnerFieldMax;}
     Button getBtnGenerate() { return btnGenerate; }
+
+    public MenuItem getAbout() {
+        return about;
+    }
+
+    public MenuItem getExit() {
+        return exit;
+    }
 }
