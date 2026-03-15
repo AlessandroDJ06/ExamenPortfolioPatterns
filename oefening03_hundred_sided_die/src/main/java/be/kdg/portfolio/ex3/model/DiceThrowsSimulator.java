@@ -20,6 +20,10 @@ public class DiceThrowsSimulator {
         throwsArchive.addValueToArchive (dice);
         return value;
     }
-    public MultiSidedDice getDice (){return dice;}
-    public ThrowsArchive getThrowsArchive () {return throwsArchive;}
+    public MultiSidedDice getDice (){
+        return dice;
+    }
+    public ThrowsArchive getThrowsArchive () {
+        return throwsArchive;
+    }
 }

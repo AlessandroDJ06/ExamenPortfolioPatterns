@@ -1,10 +1,8 @@
-package be.kdg.portfolio.ex3.view.MainScreen;
+package be.kdg.portfolio.ex3.view.mainscreen;
 
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
@@ -22,6 +20,8 @@ public class MainScreenView extends BorderPane {
     private Menu help;
     private MenuItem about;
     private MenuItem exit;
+    private Menu results;
+    private MenuItem overviewResults;
 
 
     public MainScreenView() {
@@ -38,12 +38,15 @@ public class MainScreenView extends BorderPane {
         help = new Menu("help");
         about = new MenuItem("about");
         exit = new MenuItem("exit");
+        results = new Menu("results");
+        overviewResults = new MenuItem("results overview");
     }
 
     private void layoutNodes() {
         setTop(menu);
-        menu.getMenus().add(help);
+        menu.getMenus().addAll(help,results);
         help.getItems().addAll(about,exit);
+        results.getItems().add(overviewResults);
 
 
         btnGenerate.setPrefWidth(80);
@@ -75,5 +78,9 @@ public class MainScreenView extends BorderPane {
 
     public MenuItem getExit() {
         return exit;
+    }
+
+    public MenuItem getOverviewResults() {
+        return overviewResults;
     }
 }

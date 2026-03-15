@@ -1,17 +1,14 @@
-package be.kdg.portfolio.ex3.view.MainScreen;
+package be.kdg.portfolio.ex3.view.mainscreen;
 
 import be.kdg.portfolio.ex3.model.DiceThrowsSimulator;
-import be.kdg.portfolio.ex3.view.AboutScreen.AboutScreenPresenter;
-import be.kdg.portfolio.ex3.view.AboutScreen.AboutScreenView;
-import be.kdg.portfolio.ex3.view.Alerts.Warnings;
-import javafx.application.Platform;
+import be.kdg.portfolio.ex3.view.aboutscreen.AboutScreenPresenter;
+import be.kdg.portfolio.ex3.view.aboutscreen.AboutScreenView;
+import be.kdg.portfolio.ex3.view.alerts.Warnings;
+import be.kdg.portfolio.ex3.view.resultoverview.ResultsPresenter;
+import be.kdg.portfolio.ex3.view.resultoverview.ResultsView;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -27,14 +24,12 @@ public class MainScreenPresenter {
 
     private DiceThrowsSimulator model;
     private MainScreenView view;
-    private final Warnings WARNINGS;
     private StackPane numberOfTens;
     private StackPane numberOfUnits;
 
     public MainScreenPresenter(DiceThrowsSimulator model, MainScreenView view) {
         this.model = model;
         this.view = view;
-        this.WARNINGS = new Warnings();
         this.numberOfTens = this.view.getNumberTens();
         this.numberOfUnits = this.view.getNumberUnit();
         EventHandlers();
@@ -51,7 +46,7 @@ public class MainScreenPresenter {
                 try{
                     model.multiSidedDiceThrow(minValue,maxValue);
                 } catch (IllegalArgumentException e){
-                    WARNINGS.showError(e);
+                    Warnings.showError(e);
                 }
                 updateView();
             }
@@ -59,7 +54,7 @@ public class MainScreenPresenter {
 
         view.getAbout().setOnAction(event -> {
             AboutScreenView aboutView = new AboutScreenView();
-            AboutScreenPresenter aboutPresenter = new AboutScreenPresenter(model,aboutView);
+            new AboutScreenPresenter(model,aboutView);
             Stage aboutStage = new Stage();
             aboutStage.initOwner(view.getScene().getWindow());
             aboutStage.initModality(Modality.APPLICATION_MODAL);
@@ -67,8 +62,18 @@ public class MainScreenPresenter {
             aboutStage.showAndWait();
         });
 
+        view.getOverviewResults().setOnAction(event -> {
+            ResultsView resultsView = new ResultsView();
+            new ResultsPresenter(model, resultsView);
+            Stage resultsStage = new Stage();
+            resultsStage.initOwner(view.getScene().getWindow());
+            resultsStage.initModality(Modality.APPLICATION_MODAL);
+            resultsStage.setScene(new Scene(resultsView));
+            resultsStage.showAndWait();
+        });
+
         view.getExit().setOnAction(event -> {
-            WARNINGS.handleCloseEvent(event,view);
+            Warnings.handleCloseEvent(event,view);
         });
     }
 
@@ -126,7 +131,10 @@ public class MainScreenPresenter {
     public void windowsHandler() {
         view.getScene().getWindow().setOnCloseRequest(new EventHandler<WindowEvent>() {
             @Override
-            public void handle(WindowEvent event) { WARNINGS.handleCloseEvent(event,view); }});
+            public void handle(WindowEvent event) {
+                Warnings.handleCloseEvent(event,view);
+                model.getThrowsArchive().close();
+            }});
     }
 
 

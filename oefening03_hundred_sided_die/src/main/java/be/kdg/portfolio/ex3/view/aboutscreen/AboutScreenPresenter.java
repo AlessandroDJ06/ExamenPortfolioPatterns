@@ -1,17 +1,15 @@
-package be.kdg.portfolio.ex3.view.AboutScreen;
+package be.kdg.portfolio.ex3.view.aboutscreen;
 
 import be.kdg.portfolio.ex3.model.DiceThrowsSimulator;
-import be.kdg.portfolio.ex3.view.Alerts.Warnings;
+import be.kdg.portfolio.ex3.view.alerts.Warnings;
 
 public class AboutScreenPresenter {
     private DiceThrowsSimulator model;
     private AboutScreenView view;
-    private final Warnings WARNINGS;
 
     public AboutScreenPresenter(DiceThrowsSimulator model,AboutScreenView view){
         this.view = view;
         this.model = model;
-        this.WARNINGS = new Warnings();
         addEVentHandlers();
         handleIOexception();
     }
@@ -24,7 +22,7 @@ public class AboutScreenPresenter {
 
     private void handleIOexception(){
         if (view.getImageLoadException() != null){
-            WARNINGS.showError(view.getImageLoadException());
+            Warnings.showError(view.getImageLoadException());
         }
     }
 }

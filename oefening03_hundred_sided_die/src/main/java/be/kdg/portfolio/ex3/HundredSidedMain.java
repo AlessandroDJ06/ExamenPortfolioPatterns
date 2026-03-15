@@ -1,8 +1,8 @@
 package be.kdg.portfolio.ex3;
 
 import be.kdg.portfolio.ex3.model.DiceThrowsSimulator;
-import be.kdg.portfolio.ex3.view.MainScreen.MainScreenPresenter;
-import be.kdg.portfolio.ex3.view.MainScreen.MainScreenView;
+import be.kdg.portfolio.ex3.view.mainscreen.MainScreenPresenter;
+import be.kdg.portfolio.ex3.view.mainscreen.MainScreenView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -25,6 +25,7 @@ public class HundredSidedMain extends Application {
         presenter.windowsHandler();
         primaryStage.show();
     }
+
 
     public static void main(String[] args) {
         launch(args);

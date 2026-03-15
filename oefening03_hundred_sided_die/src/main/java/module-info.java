@@ -3,6 +3,7 @@ module be.kdg.portfolio.ex3 {
     requires javafx.fxml;
     requires javafx.graphics;
     requires javafx.base;
+    requires java.sql;
 
 
     opens be.kdg.portfolio.ex3 to javafx.fxml;

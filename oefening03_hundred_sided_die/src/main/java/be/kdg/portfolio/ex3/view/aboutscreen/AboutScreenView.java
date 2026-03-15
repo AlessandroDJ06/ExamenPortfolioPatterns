@@ -1,4 +1,4 @@
-package be.kdg.portfolio.ex3.view.AboutScreen;
+package be.kdg.portfolio.ex3.view.aboutscreen;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -28,7 +28,7 @@ public class AboutScreenView extends BorderPane {
 
     public void layoutNodes(){
         try {
-            InputStream is =getClass().getResourceAsStream("/images/dic100.png");
+            InputStream is =getClass().getResourceAsStream("/images/dice100.png");
             if ( is == null) throw new IOException("Bestand niet gevonden");
             diceImageView.setImage(new Image(is));
         } catch (IOException e) {
