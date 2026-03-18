@@ -1,7 +1,9 @@
 package be.kdg.portfolio.ex3.view.resultoverview;
 
+import be.kdg.portfolio.ex3.dao.DieThrow;
 import be.kdg.portfolio.ex3.model.DiceThrowsSimulator;
-import be.kdg.portfolio.ex3.view.alerts.Warnings;
+
+import java.util.List;
 
 public class ResultsPresenter {
     private DiceThrowsSimulator model;
@@ -14,7 +16,15 @@ public class ResultsPresenter {
     }
 
 
-    private void updateView(){
-        view.getResultsOverview().setText(model.getThrowsArchive().getHistory().toString());
+    private void updateView() {
+        List<DieThrow> history = model.getThrowsArchive().getHistory();
+        StringBuilder sb = new StringBuilder(
+                String.format("Aantal worpen: %d \n",model.getThrowsArchive().getTotalNumberOfThrows())
+        );
+
+        for (DieThrow dt : history) {
+            sb.append(dt.toString()).append("\n");
+        }
+        view.getResultsOverview().setText(sb.toString());
     }
 }

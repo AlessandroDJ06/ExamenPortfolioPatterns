@@ -6,7 +6,6 @@ public class DieThrow {
     private final int min;
     private final int max;
 
-    // Gebruik deze bij een nieuwe worp
     public DieThrow(int result, int min, int max) {
         this.id = -1;
         this.result = result;
@@ -22,6 +21,6 @@ public class DieThrow {
 
     @Override
     public String toString() {
-        return String.format("Worp #%d: Resultaat %d (Bereik: %d-%d)", id, result, min, max);
+        return String.format("| Worp #%d | Resultaat %d | (Bereik: %d-%d) |", id, result, min, max);
     }
 }
