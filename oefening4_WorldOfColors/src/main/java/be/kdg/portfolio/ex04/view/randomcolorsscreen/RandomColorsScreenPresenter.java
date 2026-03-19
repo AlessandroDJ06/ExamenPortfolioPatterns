@@ -2,7 +2,10 @@ package be.kdg.portfolio.ex04.view.randomcolorsscreen;
 
 import be.kdg.portfolio.ex04.model.FlagType;
 import be.kdg.portfolio.ex04.model.ModelWorldOfColors;
+import be.kdg.portfolio.ex04.view.flagscreen.FlagScreenPresenter;
+import be.kdg.portfolio.ex04.view.flagscreen.FlagScreenView;
 import javafx.geometry.Insets;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Background;
@@ -68,6 +71,7 @@ public class RandomColorsScreenPresenter {
             extractColor(view.getButtonDownRight(),2);
             view.getScene().getWindow().hide();
         });
+
     }
     private void extractColor(Button button, int index){
         Paint paint = button.getBackground().getFills().get(0).getFill();
@@ -77,6 +81,7 @@ public class RandomColorsScreenPresenter {
         model.getFlagColors()[index].setBlue(backgroundColor.getBlue());
     }
     private void updateView() {
+
         GridPane grid = view.getGridOfColors();
         if (model.getFlagType() == FlagType.HORIZONTAL) {
             adjustButton (view.getButtonUpLeft(),0,0,1,3);
@@ -100,4 +105,6 @@ public class RandomColorsScreenPresenter {
         GridPane.setColumnSpan(button,spanColumn);
         GridPane.setRowSpan(button,spanRow);
     }
+
+
 }
